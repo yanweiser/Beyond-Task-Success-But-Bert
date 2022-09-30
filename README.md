@@ -5,7 +5,7 @@ This repository contains code for the NAACL 2019 paper
 Ravi Shekhar, Aashish Venkatesh, Tim Baumgärtner, Elia Bruni, Barbara Plank, Raffaella Bernardi and Raquel Fernández
 
 # Setup
-All code was developed and tested on Ubuntu 16.04 with Python 3.5 and [PyTorch 0.3.0](https://pytorch.org/get-started/previous-versions/). 
+All code was developed and tested on Windows 10, Python3.8 and Pytorch 1.12+cu116. 
 
 # Code Organisation
 The code is organised in the following main directories: 
@@ -35,7 +35,24 @@ This folder contains JSON files which define hyperparameters, experiment configu
 ```
 ---data
 ```
-This folder should have all the data files like training data files, vocabulary etc. It is required to download and place all the data from [guesswhat.ai](http://guesswhat.ai) in its original format. This file currently only contains catid2str.json and the rest of the files will be created as and when training scripts are invoked. Note: This folder is made for convenience and can be removed. In such a case appropriate path should be given in the config files.
+This folder should have all the data files like training data files, vocabulary etc. Place the datasets here. They can be downloaded using the following commands.
+
+```
+wget https://florian-strub.com/guesswhat.train.jsonl.gz -P data/
+wget https://florian-strub.com//guesswhat.valid.jsonl.gz -P data/
+wget https://florian-strub.com//guesswhat.test.jsonl.gz -P data/
+```
+You also need to place the raw MSCOCO images from which the image features need to be extracted. Get the images from here:
+
+```
+wget http://msvocds.blob.core.windows.net/coco2014/train2014.zip -P data/img/
+wget http://msvocds.blob.core.windows.net/coco2014/val2014.zip -P data/img/
+
+unzip data/img/train2014.zip -d data/img/raw
+unzip data/img/val2014.zip -d data/img/raw
+```
+
+Make sure to place all images in a single folder since the unzip will create additional folders.
 
 ```
 ---logs
@@ -78,11 +95,6 @@ If you find this code useful, consider citing our work:
   booktitle = {NAACL-HLT}
 }
 ```
-
-# Contributors
-
-* [Ravi Shekhar](http://shekharravi.github.io)
-* [Aashish Venkatesh](https://github.com/AashishV/)
 
 # License
 
